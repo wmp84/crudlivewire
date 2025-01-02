@@ -7,7 +7,10 @@
     @vite(['resources/css/app.css','resources/js/app.js'])
 </head>
 <body>
-
+    <x-nav>
+        <x-link redirect="{{route('cursos')}}">Cursos</x-link>
+        <x-link redirect="{{route('cursos')}}">Papelera</x-link>
+    </x-nav>
     {{$slot}}
 </body>
 </html>
