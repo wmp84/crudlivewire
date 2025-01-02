@@ -9,5 +9,6 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class Curso extends Model
 {
     protected $primaryKey = "id_curso";
+    protected $fillable = ["nombre_curso","descripcion","precio"];
     use HasFactory, SoftDeletes;
 }
