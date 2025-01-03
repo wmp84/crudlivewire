@@ -48,7 +48,7 @@
                             </td>
                             <td class="px-6 py-4">
                                 <button wire:navigate href="{{route("curso.editar",$curso)}}" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Editar</button>
-                                <button type="button" class="focus:outline-none text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-2 py-2 mb-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900">Eliminar</button>
+                                <button type="button" class="focus:outline-none text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-2 py-2 mb-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900" wire:click="confirmarEliminado('{{$curso->id_curso}}','{{$curso->nombre_curso}}')">Eliminar</button>
                             </td>
                         </tr>
                     @empty
@@ -58,5 +58,34 @@
         </div>
 
     </div>
-
 </div>
+
+@script
+    <script>
+        $wire.on('confirmareliminado',function(mensaje,nombre_curso){
+            Swal.fire({
+                title: mensaje,
+                text: "Al realizar esta acción, este elemento será enviado a la papelera!",
+                icon: "question",
+                showCancelButton: true,
+                confirmButtonColor: "#3085d6",
+                cancelButtonColor: "#d33",
+                confirmButtonText: "Si"
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    $wire.dispatch("eliminar");
+                }
+            });
+        });
+
+        $wire.on('borrado',function(mensaje) {
+            Swal.fire(
+                {
+                    title:"Notición",
+                    text:mensaje,
+                    icon:"success",
+                }
+            )
+        });
+    </script>
+@endscript
