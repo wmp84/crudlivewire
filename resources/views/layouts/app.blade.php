@@ -9,7 +9,7 @@
 <body>
     <x-nav>
         <x-link redirect="{{route('cursos')}}">Cursos</x-link>
-        <x-link redirect="{{route('cursos')}}">Papelera</x-link>
+        <x-link redirect="{{route('curso.papelera')}}">Papelera</x-link>
     </x-nav>
     {{$slot}}
 </body>
