@@ -42,8 +42,10 @@
                             {{$curso->precio}}
                         </td>
                         <td class="px-6 py-4">
-                            <button wire:navigate href="{{route("curso.editar",$curso)}}" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Activar</button>
-                            <button type="button" class="focus:outline-none text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-2 py-2 mb-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900" wire:click="confirmarEliminado('{{$curso->id_curso}}','{{$curso->nombre_curso}}')">Borrar</button>
+                            {{--<button type="button" wire:navigate href="{{route("curso.editar",$curso)}}" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Activar</button>--}}
+                            <button type="button" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-2 py-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">Activar</button>
+
+                            <button type="button" class="focus:outline-none text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-2 py-2 mb-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900" wire:click="ConfirmarBorrado('{{$curso->id_curso}}','{{$curso->nombre_curso}}')">Borrar</button>
                         </td>
                     </tr>
                 @empty
@@ -54,3 +56,29 @@
 
     </div>
 </div>
+@script
+    <script>
+        $wire.on('confirm-borrado', function (mensaje){
+            Swal.fire({
+                title: mensaje,
+                text: "Esta acción es irrevesrible, desea continuar!",
+                icon: "question",
+                showCancelButton: true,
+                confirmButtonColor: "#3085d6",
+                cancelButtonColor: "#d33",
+                confirmButtonText: "Si"
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    $wire.dispatch("ok-borrado");
+                }
+            });
+        });
+        $wire.on('success-borrado',function (msj){
+            Swal.fire({
+                title:"Mensaje",
+                text:msj,
+                icon:"success"
+            })
+        })
+    </script>
+@endscript
