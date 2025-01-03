@@ -36,7 +36,13 @@ class PapeleraCursos extends Component
         $this->dispatch("success-borrado", "Curso borrado correctamente");
         $this->mostrarCursosPapelera();
     }
-
+    public function activar($id)
+    {
+        $curso = Curso::onlyTrashed()->find($id);
+        $curso->restore();
+        $this->dispatch("activado","Curso activado correctamente");
+        $this->mostrarCursosPapelera();
+    }
     public function render()
     {
         return view('livewire.papelera-cursos');
