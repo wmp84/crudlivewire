@@ -10,6 +10,7 @@ class Cursos extends Component
 {
     public $cursos;
     public $IdCurso;
+    public $search;
     #[On("borrado")]
     public function mount()
     {
@@ -17,7 +18,9 @@ class Cursos extends Component
     }
     public function mostrarCurso()
     {
-        $this->cursos=Curso::all();
+        $this->cursos=Curso::where("nombre_curso","like", "%".$this->search."%")
+            ->orwhere("descripcion","like", "%".$this->search."%")
+            ->get();
     }
     public function render()
     {
