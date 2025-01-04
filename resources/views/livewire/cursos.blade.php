@@ -1,6 +1,5 @@
+
 <div class="px-3 py-4">
-
-
     <div
         class="w-full p-4 bg-white border border-gray-200 rounded-lg shadow sm:p-6 md:p-8 dark:bg-gray-800 dark:border-gray-700">
         <h1 class="font-bold mb-2">Listado de cursos</h1>
@@ -31,20 +30,55 @@
 
 
             <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
-                <thead
-                    class="text-xs text-white uppercase bg-blue-600 hover:bg-blue-700 dark:bg-gray-700 dark:text-gray-400">
+                <thead class="text-xs text-white uppercase bg-blue-600 hover:bg-blue-700 dark:bg-gray-700 dark:text-gray-400">
                 <tr>
                     <th scope="col" class="px-6 py-3">
                         #
                     </th>
-                    <th scope="col" class="px-6 py-3">
-                        Nombre curso
+                    <th scope="col" class="cursor-pointer px-6 py-3"
+                        wire:click="order('nombre_curso')">
+                        <div class="flex items-center">
+                            Curso
+                            @if($sort == 'nombre_curso')
+                                @if($direction == 'asc')
+                                    <i class="fas fa-sort-alpha-up-alt ml-2"></i>
+                                @else
+                                    <i class="fas fa-sort-alpha-down-alt ml-2"></i>
+                                @endif
+                            @else
+                                <i class="fas fa-sort ml-2"></i>
+                            @endif
+                        </div>
                     </th>
-                    <th scope="col" class="px-6 py-3">
-                        Descripción
+                    <th scope="col" class="cursor-pointer px-6 py-3"
+                        wire:click="order('descripcion')">
+                        <div class="flex items-center">
+                            Descripción
+                            @if($sort == 'descripcion')
+                                @if($direction == 'asc')
+                                    <i class="fas fa-sort-alpha-up-alt ml-2"></i>
+                                @else
+                                    <i class="fas fa-sort-alpha-down-alt ml-2"></i>
+                                @endif
+                            @else
+                                <i class="fas fa-sort ml-2"></i>
+                            @endif
+                        </div>
                     </th>
-                    <th scope="col" class="px-6 py-3">
-                        Precio
+                    <th scope="col" class="cursor-pointer px-6 py-3"
+                        wire:click="order('precio')">
+                        <div class="flex items-center">
+                            Precio
+                            @if($sort == 'precio')
+                                @if($direction == 'asc')
+                                    <i class="fas fa-sort-alpha-up-alt ml-2"></i>
+                                @else
+                                    <i class="fas fa-sort-alpha-down-alt ml-2"></i>
+                                @endif
+                            @else
+                                <i class="fas fa-sort ml-2"></i>
+                            @endif
+                        </div>
                     </th>
                     <th scope="col" class="px-6 py-3">
                         Acciones
@@ -54,7 +88,7 @@
                 <tbody>
                 @forelse($cursos as $index=>$curso)
                     <tr class="odd:bg-white odd:dark:bg-gray-900 even:bg-gray-50 even:dark:bg-gray-800 border-b dark:border-gray-700">
-                        <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                        <th scope="row" class="px-6 py-4 font-medium text-gray-900 dark:text-white">
                             {{$index+1}}
                         </th>
                         <td class="px-6 py-4">
